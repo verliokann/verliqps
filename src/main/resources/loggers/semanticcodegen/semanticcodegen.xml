@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:util="http://www.springframework.org/schema/util"
+    
+         xsi:schemaLocation="
+        	http://www.springframework.org/schema/beans
+        	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        
+        	http://www.springframework.org/schema/util
+        	http://www.springframework.org/schema/util/spring-util-3.2.xsd
+        	
+        	http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+        	
+<!-- Включаем аннотации -->
+ <context:annotation-config/> 
+
+ 
+<!-- Бины парсеров -->
+    <bean id="documentBuilderFactory"
+          class="javax.xml.parsers.DocumentBuilderFactory"
+          factory-method="newInstance">
+        <property name="validating" value="false" />
+        <property name="ignoringElementContentWhitespace" value="true" />
+    </bean>
+
+    <bean id="documentBuilder" class="javax.xml.parsers.DocumentBuilder"
+          factory-bean="documentBuilderFactory"
+          factory-method="newDocumentBuilder">
+    </bean>
+
+	<!-- <bean id="xmlcodeblock" class="org.w3c.dom.Document"
+		  factory-bean="documentBuilder"
+          factory-method="parse">
+          <constructor-arg><value>"C://Temp//books.xml"</value></constructor-arg>          
+	</bean> -->
+
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  -->
+<bean id="coneventlogger" class="ru.verlioka.codegen.semanticcodegen.ConsolEventLogger" />
+
+
+<!-- <bean id="fileeventlogger" class="ru.verlioka.codegen.semanticcodegen.FileEventLogger" init-method="init" >
+	<constructor-arg><value>C://Temp//filelogger.txt</value></constructor-arg>	
+</bean>
+
+
+<bean id="cachefileeventlogger" class="ru.verlioka.codegen.semanticcodegen.CacheFileEventLogger" init-method="init" destroy-method="destroy" >
+    <constructor-arg><value>C://Temp//cachefilelogger.txt</value></constructor-arg>	
+	<constructor-arg><value>5</value></constructor-arg>
+</bean>
+ -->
+
+
+<!--  ******************************************** Вариант наследования через Parent *******************************************  -->
+<bean id="fileeventlogger" class="ru.verlioka.codegen.semanticcodegen.FileEventLogger" init-method="init" >
+	<constructor-arg><value>C:\Temp\filelogger.txt</value></constructor-arg>	
+</bean>
+
+
+<bean id="cachefileeventlogger" class="ru.verlioka.codegen.semanticcodegen.CacheFileEventLogger" destroy-method="destroy" parent="fileeventlogger">	
+	<constructor-arg><value>5</value></constructor-arg>
+</bean>
+ 
+<!--  **************************************** (конец) Вариант наследования через Parent ***************************************  -->
+
+<bean id="combinedeventlogger" class="ru.verlioka.codegen.semanticcodegen.CombinedEventLogger">
+	<constructor-arg>
+		<list>
+		   <ref bean="coneventlogger"/>
+		   <ref bean="fileeventlogger"/>		   
+		</list>
+	</constructor-arg>
+</bean>
+
+</beans>
