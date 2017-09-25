@@ -17,9 +17,9 @@
  <bean id="dataSource"
       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="org.postgresql.Driver"/>
-    <property name="url" value="jdbc:postgresql://localhost:5432/YMapSampleDb"/>
+    <property name="url" value="jdbc:postgresql://localhost:5432/verlistudy_db"/>
     <property name="username" value="postgres"/>
-    <property name="password" value="rfylblfn87"/>
+    <property name="password" value="0000"/>
  </bean> 
 <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
 <bean id="jpaVendorAdapter"

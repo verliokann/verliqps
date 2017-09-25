@@ -31,18 +31,17 @@ define(['backbone', 'rolepaggrid', 'roles', 'role', 'text!app_admin/templates/ro
 		    	    		    	    	    
 		    	    app.groups.each(function (groupmodel,ind) {					
 		    	    	var grouproles = _.clone(groupmodel.get("roles"));	  
-		    	    	
+		    	    			    	    	
 		    	    	_.each(grouproles, function(role) {
-		    	    		if (role.id == app.casheedtrecords.at(i).get("id")){			    			
+		    	    		if ((role.id == app.casheedtrecords.at(i).get("id")) && (app.dl_flag)){			    			
 				    			 app.dl_flag = false;
-								 app.alerttext = app.alerttext+" "+app.casheedtrecords.at(i).get("rolename");									
+								 app.alerttext = app.alerttext+" "+app.casheedtrecords.at(i).get("rolename");								
 				         	} 			        		
  			        	})	    	    	 	       
 		    	     });	    	    	
 		    	    
 		    	    	
-		    	    if (app.dl_flag ){	
-		    	    console.log('Попытка удаления!!!!!!!!!!!!!!!!!!!;;;;;;;;;;;;;;;;;%%%%%%%%%%%%%%%%% ');
+		    	    if (app.dl_flag ){		    	   
 		    	    app.casheedtrecords.at(i).destroy({	    	      
 					    success: function (model, respose, options) {
 					        console.log("Роль удалилась");    

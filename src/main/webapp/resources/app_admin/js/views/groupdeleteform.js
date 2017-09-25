@@ -33,7 +33,7 @@ define(['backbone', 'grouppaggrid', 'groups', 'group', 'text!app_admin/templates
 		    	    	var usergroups = _.clone(usermodel.get("userGroups"));	  
 		    	    	
 		    	    	_.each(usergroups, function(group) {
-		    	    		if (group.id == app.casheedtrecords.at(i).get("id")){			    			
+		    	    		if ((group.id == app.casheedtrecords.at(i).get("id")) && (app.dl_flag)){			    			
 				    			 app.dl_flag = false;
 								 app.alerttext = app.alerttext+" "+app.casheedtrecords.at(i).get("name");									
 				         	} 			        		
