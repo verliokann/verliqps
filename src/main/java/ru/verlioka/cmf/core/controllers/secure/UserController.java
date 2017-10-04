@@ -86,7 +86,9 @@ public class UserController {
 	}	 	
 	 
 	@RequestMapping(value="/user", method=RequestMethod.POST, consumes="application/json")
-	public @ResponseBody EntityUser addUser(@RequestBody EntityUser u) {		
+	public @ResponseBody EntityUser addUser(@RequestBody EntityUser u) {
+		IHashCode hc = new HashCode();
+		u.setPassword(hc.getHashPassword(u.getPassword()));
 		return fusi.add(u);	
 	}		
 	
