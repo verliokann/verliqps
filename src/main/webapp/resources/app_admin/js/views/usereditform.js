@@ -108,7 +108,7 @@ define(['backbone', 'groups', 'group', 'grouppaggrid', 'usergroupsspr', 'text!ap
 		                        	   	 				console.log("Группа не добавилась ", err);
 		                        	   	 			}    
 	    						          });
-		    	 } else {alert("Пароли не совпадают")};	    
+		    	 } else {swal("Пароли не совпадают")};	    
 	    	},
 		    updClicked: function () {	   
 		      
@@ -119,7 +119,7 @@ define(['backbone', 'groups', 'group', 'grouppaggrid', 'usergroupsspr', 'text!ap
 		    	    	this.$el.find('input[id="inputPasswordCopy'+app.casheedtrecords.at(i).get("id")+'"]').val()){		    	    
 		    	    		app.casheedtrecords.at(i).set({login: this.$el.find('input[id="usernameinput'+app.casheedtrecords.at(i).get("id")+'"]').val().trim(),
 		    	    	                                   password: this.$el.find('input[id="inputPassword'+app.casheedtrecords.at(i).get("id")+'"]').val().trim()});
-		    	       } else {alert("Пароли не совпадают")} 	
+		    	       } else {swal("Пароли не совпадают")} 	
 		    	}    
 		    	
 		    	for (i=(app.casheedtrecords.length-1);i>-1;i--){    		    	    
