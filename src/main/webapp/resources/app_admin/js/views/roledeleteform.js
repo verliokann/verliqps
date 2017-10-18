@@ -54,7 +54,7 @@ define(['backbone', 'rolepaggrid', 'roles', 'role', 'text!app_admin/templates/ro
 		    	    } 
 		    	}
 		    	
-		    	if (!app.alerttext.trim() == "") alert("Роль/роли: "+app.alerttext+" не могут быть удалены, так как они связаны с группами.");	    	  
+		    	if (!app.alerttext.trim() == "") swal("Роль/роли: "+app.alerttext+" не могут быть удалены, так как они связаны с группами.");	    	  
 		    },		    
 		    generateDeleteForm:function(){
 		    	//Удаляем предыдущую форму

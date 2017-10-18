@@ -16,12 +16,13 @@
 	    <link href="resources/app_loader/css/apploader.css" rel="stylesheet" type="text/css"  media="screen">	    
 	    <link href="resources/app_admin/style/css/main.css" rel="stylesheet" type="text/css"  media="screen">
 	    <link href="resources/app_admin/style/css/admin_main.css" rel="stylesheet" type="text/css"  media="screen"> 	    		
-        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.min.css" rel="stylesheet" media="screen"> 
 
 		<script src="resources/js/jquery-3.2.1.js"></script>		
 		<script src="resources/js/bootstrap.min.js"></script>	
 		<script src="resources/app_admin/js/ui/ui.js"></script>
 		<script src="resources/app_admin/configs/namespace.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.1/sweetalert2.all.min.js"></script>
 			
 		<!-- Подключаем require для организации асинхронной загрузки клиентских js скриптов -->	
 		<script data-main="<c:url value="/resources/app_admin/configs/config"/>" src="<c:url value="/resources/js/require.js"/>"> </script>

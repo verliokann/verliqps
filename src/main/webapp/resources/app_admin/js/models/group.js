@@ -9,7 +9,7 @@ define(['backbone'], function(Backbone){
 	 validate: function(attrs, options) {
 		    //имя роли не должно быть пустым
 		    if (attrs.name == '') {
-		  	  alert('Введите название группы');	
+		      swal('Введите название группы');	
 		      return "необходимо ввести имя";
 		    }
      },	 

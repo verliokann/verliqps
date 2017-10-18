@@ -54,7 +54,7 @@ define(['backbone', 'grouppaggrid', 'groups', 'group', 'text!app_admin/templates
 		    	    } 
 		    	}
 		    	
-		    	if (!app.alerttext.trim() == "") alert("Группа/группы: "+app.alerttext+" не могут быть удалены, так как в них зарегистрированы пользователи.");
+		    	if (!app.alerttext.trim() == "") swal("Группа/группы: "+app.alerttext+" не могут быть удалены, так как в них зарегистрированы пользователи.");
 		    },		    
 		    generateDeleteForm:function(){		    	
 		    	//Удаляем предыдущую форму
