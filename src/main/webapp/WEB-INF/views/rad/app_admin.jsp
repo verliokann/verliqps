@@ -60,12 +60,12 @@
       </div>
     </div>-->
   </div> 
-  <div id="groupdeleteform" class="modal-content unvisibleblock">
-  
+  <div id="groupdeleteform" class="modal-content unvisibleblock">  
   </div>
-  <div id="userdeleteform" class="modal-content unvisibleblock">
-  
+  <div id="userdeleteform" class="modal-content unvisibleblock">  
   </div>  
+  <div id="applicationdeleteform" class="modal-content unvisibleblock">  
+  </div> 
 </div>	
 </div>
                       
@@ -111,6 +111,8 @@
     </div>
     <div id="useredtform" class="modal-content unvisibleblock">
     </div>
+    <div id="applicationedtform" class="modal-content unvisibleblock">
+    </div>
   </div>
 </div>							 
 
@@ -131,12 +133,23 @@
 				<a class="navbar-brand">Справочники:</a>
 											
 				<form class="navbar-form navbar-left">
-					<a href="#" id="rolemode" class="btn btn-default"
-					            onclick="ZUI.refreshModal('roleedtform','useredtform','groupedtform'); ZUI.refreshModal('roledeleteform','userdeleteform','groupdeleteform');">Роли пользователей</a>					
-					<a href="#" id="groupmode" class="btn btn-default" 
-					            onclick="ZUI.refreshModal('groupedtform','roleedtform','useredtform'); ZUI.refreshModal('groupdeleteform','roledeleteform','userdeleteform')">Группы пользователей</a>
-					<a href="#" id="usermode" class="btn btn-default" 
-					            onclick="ZUI.refreshModal('useredtform', 'groupedtform', 'roleedtform'); ZUI.refreshModal('userdeleteform', 'groupdeleteform', 'roledeleteform')">Пользователи</a>
+					
+					<a href="#" id="rolemode" block="role" class="btn btn-default" onclick="ZUI.refreshModal(this)">
+						Роли пользователей
+					</a>	
+					            				
+					<a href="#" id="groupmode" block="group" class="btn btn-default" onclick="ZUI.refreshModal(this)">
+						Группы пользователей
+					</a>
+					            
+					<a href="#" id="usermode" block="user" class="btn btn-default" onclick="ZUI.refreshModal(this)">
+						Пользователи
+					</a>
+					            
+   					<a href="#" id="applicationmode" block="application" class="btn btn-default" onclick="ZUI.refreshModal(this)">
+   						Приложения
+   					</a>
+					            
 			    </form>
 										
 				<a class="navbar-brand">  Управление записями:</a>
