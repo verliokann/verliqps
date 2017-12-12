@@ -1,18 +1,18 @@
-package ru.verlioka.cmf.appservices.yandexmapsample.services.suppie;
+package ru.verlioka.cmf.appservices.suppie.services;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.verlioka.cmf.appservices.yandexmapsample.controllers.suppie.json.BalanceReport;
-import ru.verlioka.cmf.appservices.yandexmapsample.controllers.suppie.json.PaymentsReport;
-import ru.verlioka.cmf.appservices.yandexmapsample.dao.suppie.CustomerDao;
-import ru.verlioka.cmf.appservices.yandexmapsample.dao.suppie.PaymentsDao;
-import ru.verlioka.cmf.appservices.yandexmapsample.dao.suppie.TariffDao;
-import ru.verlioka.cmf.appservices.yandexmapsample.models.suppie.CustomerEntity;
-import ru.verlioka.cmf.appservices.yandexmapsample.models.suppie.PaymentsEntity;
-import ru.verlioka.cmf.appservices.yandexmapsample.models.suppie.TariffEntity;
+import ru.verlioka.cmf.appservices.suppie.controllers.json.BalanceReport;
+import ru.verlioka.cmf.appservices.suppie.controllers.json.PaymentsReport;
+import ru.verlioka.cmf.appservices.suppie.dao.CustomerDao;
+import ru.verlioka.cmf.appservices.suppie.dao.PaymentsDao;
+import ru.verlioka.cmf.appservices.suppie.dao.TariffDao;
+import ru.verlioka.cmf.appservices.suppie.models.CustomerEntity;
+import ru.verlioka.cmf.appservices.suppie.models.PaymentsEntity;
+import ru.verlioka.cmf.appservices.suppie.models.TariffEntity;
 import ru.verlioka.cmf.core.services.generic.db.GenericServiceImpl;
 
 import java.text.DateFormatSymbols;

@@ -1,7 +1,7 @@
-package ru.verlioka.cmf.appservices.yandexmapsample.dao.suppie;
+package ru.verlioka.cmf.appservices.suppie.dao;
 
 import org.springframework.stereotype.Repository;
-import ru.verlioka.cmf.appservices.yandexmapsample.models.suppie.CustomerEntity;
+import ru.verlioka.cmf.appservices.suppie.models.CustomerEntity;
 import ru.verlioka.cmf.core.dao.generic.GenericDaoImpl;
 
 @Repository("customerDaoImpl")

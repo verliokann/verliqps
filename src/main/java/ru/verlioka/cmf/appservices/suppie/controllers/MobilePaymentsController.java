@@ -1,4 +1,4 @@
-package ru.verlioka.cmf.appservices.yandexmapsample.controllers.suppie;
+package ru.verlioka.cmf.appservices.suppie.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.verlioka.cmf.appservices.yandexmapsample.controllers.suppie.json.BalanceReport;
-import ru.verlioka.cmf.appservices.yandexmapsample.controllers.suppie.json.PaymentsReport;
-import ru.verlioka.cmf.appservices.yandexmapsample.services.suppie.CustomerService;
+import ru.verlioka.cmf.appservices.suppie.controllers.json.BalanceReport;
+import ru.verlioka.cmf.appservices.suppie.controllers.json.PaymentsReport;
+import ru.verlioka.cmf.appservices.suppie.services.CustomerService;
 
 import java.util.List;
 

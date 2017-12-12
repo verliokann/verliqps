@@ -1,6 +1,6 @@
-package ru.verlioka.cmf.appservices.yandexmapsample.dao.suppie;
+package ru.verlioka.cmf.appservices.suppie.dao;
 
-import ru.verlioka.cmf.appservices.yandexmapsample.models.suppie.PaymentsEntity;
+import ru.verlioka.cmf.appservices.suppie.models.PaymentsEntity;
 import ru.verlioka.cmf.core.dao.generic.IGenericDao;
 
 import java.util.List;

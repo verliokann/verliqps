@@ -1,4 +1,4 @@
-package ru.verlioka.cmf.appservices.yandexmapsample.models.suppie;
+package ru.verlioka.cmf.appservices.suppie.models;
 
 import javax.persistence.*;
 import java.sql.Date;

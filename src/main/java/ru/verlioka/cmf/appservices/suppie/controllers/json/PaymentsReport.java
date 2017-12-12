@@ -1,18 +1,15 @@
-package ru.verlioka.cmf.appservices.yandexmapsample.controllers.suppie.json;
+package ru.verlioka.cmf.appservices.suppie.controllers.json;
 
-// № телефона, ФИО, месяц, сумма к оплате, сумма долга, сумма оплаты
-// Подразумевается, что:
-// Сумма к оплате = сумма долга + стоимость тарифа
-// Сумма оплаты = сумма оплат мобильной связи в течение месяца
-public class BalanceReport {
+// № телефона, ФИО, адрес, месяц, сумма оплаты (за месяц), количество минут
+public class PaymentsReport {
     private String phoneNumber;
     private String name;
+    private String address;
     private String month;
-    private Double requiredToPay;
-    private Double debtAmount;
     private Double paymentsAmount;
+    private Integer minutesAmount;
 
-    public BalanceReport() {
+    public PaymentsReport() {
     }
 
     public String getPhoneNumber() {
@@ -31,6 +28,14 @@ public class BalanceReport {
         this.name = name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getMonth() {
         return month;
     }
@@ -39,28 +44,20 @@ public class BalanceReport {
         this.month = month;
     }
 
-    public Double getRequiredToPay() {
-        return requiredToPay;
-    }
-
-    public void setRequiredToPay(Double requiredToPay) {
-        this.requiredToPay = requiredToPay;
-    }
-
-    public Double getDebtAmount() {
-        return debtAmount;
-    }
-
-    public void setDebtAmount(Double debtAmount) {
-        this.debtAmount = debtAmount;
-    }
-
     public Double getPaymentsAmount() {
         return paymentsAmount;
     }
 
     public void setPaymentsAmount(Double paymentsAmount) {
         this.paymentsAmount = paymentsAmount;
+    }
+
+    public Integer getMinutesAmount() {
+        return minutesAmount;
+    }
+
+    public void setMinutesAmount(Integer minutesAmount) {
+        this.minutesAmount = minutesAmount;
     }
 
     @Override
@@ -72,36 +69,36 @@ public class BalanceReport {
             return false;
         }
 
-        BalanceReport that = (BalanceReport) o;
+        PaymentsReport that = (PaymentsReport) o;
 
         return (getPhoneNumber() != null ? getPhoneNumber().equals(that.getPhoneNumber()) : that.getPhoneNumber() == null) &&
                 (getName() != null ? getName().equals(that.getName()) : that.getName() == null) &&
+                (getAddress() != null ? getAddress().equals(that.getAddress()) : that.getAddress() == null) &&
                 (getMonth() != null ? getMonth().equals(that.getMonth()) : that.getMonth() == null) &&
-                (getRequiredToPay() != null ? getRequiredToPay().equals(that.getRequiredToPay()) : that.getRequiredToPay() == null) &&
-                (getDebtAmount() != null ? getDebtAmount().equals(that.getDebtAmount()) : that.getDebtAmount() == null) &&
-                (getPaymentsAmount() != null ? getPaymentsAmount().equals(that.getPaymentsAmount()) : that.getPaymentsAmount() == null);
+                (getPaymentsAmount() != null ? getPaymentsAmount().equals(that.getPaymentsAmount()) : that.getPaymentsAmount() == null) &&
+                (getMinutesAmount() != null ? getMinutesAmount().equals(that.getMinutesAmount()) : that.getMinutesAmount() == null);
     }
 
     @Override
     public int hashCode() {
         int result = getPhoneNumber() != null ? getPhoneNumber().hashCode() : 0;
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
         result = 31 * result + (getMonth() != null ? getMonth().hashCode() : 0);
-        result = 31 * result + (getRequiredToPay() != null ? getRequiredToPay().hashCode() : 0);
-        result = 31 * result + (getDebtAmount() != null ? getDebtAmount().hashCode() : 0);
         result = 31 * result + (getPaymentsAmount() != null ? getPaymentsAmount().hashCode() : 0);
+        result = 31 * result + (getMinutesAmount() != null ? getMinutesAmount().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "BalanceReport{" +
+        return "PaymentsReport{" +
                 "phoneNumber='" + phoneNumber + '\'' +
                 ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
                 ", month='" + month + '\'' +
-                ", requiredToPay=" + requiredToPay +
-                ", debtAmount=" + debtAmount +
                 ", paymentsAmount=" + paymentsAmount +
+                ", minutesAmount=" + minutesAmount +
                 '}';
     }
 }
