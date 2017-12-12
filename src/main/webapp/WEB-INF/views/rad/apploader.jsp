@@ -9,14 +9,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	    
+			    
 	    <link href="resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	    <link href="resources/app_loader/css/apploader.css" rel="stylesheet" type="text/css"  media="screen">
-	           
-		
+	           	
 		<script src="resources/js/jquery-3.2.1.js"></script>		
 		<script src="resources/js/bootstrap.min.js"></script> 
 
+		<script src="resources/start_page/js/ui/ui.js"></script>
+		<script src="resources/start_page/configs/namespace.js"></script>
+
+		<!-- Подключаем require для организации асинхронной загрузки клиентских js скриптов -->	
+		<script data-main="<c:url value="/resources/start_page/configs/config"/>" src="<c:url value="/resources/js/require.js"/>"> </script>
+		
 <title></title>
 </head>
 <body>   
@@ -60,6 +65,11 @@
       <div class="container">
         <div class="row">
         
+        <script>
+        $(document).ready(function() {
+        	  	
+        });
+        </script>
         
                      
      <!-- Блок 1 (начало)
@@ -96,18 +106,16 @@
           </div>
           </c:if> --%>
           
-          <c:if test="${role == 'ROLE_ADMIN'}">          
-          <div class="col-md-<fmt:formatNumber type="number" maxFractionDigits="0" value="${12/ncol}" />">
-          <a class="btn btn-primary" href="/cmf/app_admin">Открыть</a>
-            <h3 class="text-center">РМ "Администратор"</h3>
-            <p>Управление учетными записями пользователей</p>
-          </div>
           
-          <div class="col-md-<fmt:formatNumber type="number" maxFractionDigits="0" value="${12/ncol}" />">
-          <a class="btn btn-primary" href="/cmf/map">Открыть</a>
-            <h3 class="text-center">"Яндекс карты"</h3>
-            <p>Записная книжка</p>
-          </div>          
+          
+          <c:if test="${role == 'ROLE_ADMIN'}">          
+          
+          <div id="container"></div>
+          
+          <input type="hidden" id="col-number"  value="<fmt:formatNumber type="number" maxFractionDigits="0" value="${12/ncol}" />">
+          
+  		  <div id="container"></div>
+                  
           </c:if>
         
         </c:forEach>

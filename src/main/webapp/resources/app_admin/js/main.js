@@ -1,7 +1,6 @@
 /**
  * http://usejsdoc.org/
  */
-
 define([
         'role',
         'roles',
@@ -61,7 +60,7 @@ define([
 	app.datastate = 'data';	
 	app.cc = new App.Views.CUDControl();
 		
-	app.mpg = new App.Views.RolePagGrid({collection: app.roles, parentpaggrid: '#mainGridPlace'});	
+	app.mpg = new App.Views.RolePagGrid({collection: app.roles, container: '#container'});	
 						
 	// *************************************** НЕКОТОРЫЕ ОБРАБОТЧИКИ DOM ************************************************************
 	
