@@ -1,0 +1,66 @@
+[
+  {
+    "phoneNumber":"+79990000001",
+    "name":"Ivanov Ivan Ivanovich",
+    "month":"Sep 2017",
+    "requiredToPay":500.0,
+    "debtAmount":-100.0,
+    "paymentsAmount":600.0
+  },
+  {
+    "phoneNumber":"+79990000001",
+    "name":"Ivanov Ivan Ivanovich",
+    "month":"Oct 2017",
+    "requiredToPay":500.0,
+    "debtAmount":-100.0,
+    "paymentsAmount":500.0
+  },
+  {
+    "phoneNumber":"+79990000001",
+    "name":"Ivanov Ivan Ivanovich",
+    "month":"Nov 2017",
+    "requiredToPay":500.0,
+    "debtAmount":0.0,
+    "paymentsAmount":400.0
+  },
+  {
+    "phoneNumber":"+79990000001",
+    "name":"Ivanov Ivan Ivanovich",
+    "month":"Dec 2017",
+    "requiredToPay":500.0,
+    "debtAmount":0.0,
+    "paymentsAmount":500.0
+  },
+  {
+    "phoneNumber":"+79990000002",
+    "name":"Petrov Petr Petrovich",
+    "month":"Sep 2017",
+    "requiredToPay":400.0,
+    "debtAmount":0.0,
+    "paymentsAmount":400.0
+  },
+  {
+    "phoneNumber":"+79990000002",
+    "name":"Petrov Petr Petrovich",
+    "month":"Oct 2017",
+    "requiredToPay":400.0,
+    "debtAmount":100.0,
+    "paymentsAmount":300.0
+  },
+  {
+    "phoneNumber":"+79990000002",
+    "name":"Petrov Petr Petrovich",
+    "month":"Nov 2017",
+    "requiredToPay":400.0,
+    "debtAmount":100.0,
+    "paymentsAmount":400.0
+  },
+  {
+    "phoneNumber":"+79990000002",
+    "name":"Petrov Petr Petrovich",
+    "month":"Dec 2017",
+    "requiredToPay":400.0,
+    "debtAmount":100.0,
+    "paymentsAmount":400.0
+  }
+]
