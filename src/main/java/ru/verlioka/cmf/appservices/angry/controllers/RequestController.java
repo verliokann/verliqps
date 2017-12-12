@@ -3,6 +3,7 @@ package ru.verlioka.cmf.appservices.angry.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,7 +67,7 @@ public class RequestController {
     @RequestMapping(value = "/request_1", method = RequestMethod.GET)
     public
     @ResponseBody
-    String Request() {
+    String Request1() {
         List<SupplyEntity> supply_list = supplyService.getAll();
         String JSON_String = new String();
         JSON_String = "[";
@@ -74,10 +75,7 @@ public class RequestController {
         for(SupplyEntity Entity : supply_list) {
             CommodityEntity commodityEntity = commodityService.find(Entity.getCommodity_id());
             ProvidersEntity providersEntity = providersService.find(Entity.getProvider_id());
-        if(isFirst)
-            isFirst = false;
-        else
-            JSON_String +=",";
+        if(isFirst) isFirst = false; else JSON_String +=",";
             JSON_String += "{";
             JSON_String += "\"Commodity name\":\"" + commodityEntity.getName() + "\",";
             JSON_String += "\"Commodity description\":\""  +  commodityEntity.getDescription() + "\",";
@@ -96,5 +94,55 @@ public class RequestController {
         JSON_String += "]";
         return JSON_String;
     }
+
+    @RequestMapping(value = "/request_2", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String Request2() {
+        List<CommodityEntity> commodity_list = commodityService.getAll();
+        List<SupplyEntity> supply_list = supplyService.getAll();
+
+        String JSON_String = new String();
+        JSON_String = "[";
+        boolean isFirst = true;
+        for(CommodityEntity Entity : commodity_list) {
+            CommodityTypeEntity commodityTypeEntity = commodityTypeService.find(Entity.getType_id());
+            if(isFirst) isFirst = false; else JSON_String +=",";
+            JSON_String += "\"Commodity type\":\"" + commodityTypeEntity.getName() + "\",";
+            JSON_String += "\"Commodity name\":\"" + Entity.getName() + "\",";
+            int Count = 0;
+            for(SupplyEntity SupplyEntity : supply_list) {if(SupplyEntity.getCommodity_id() == Entity.getId()){Count++;}}
+            JSON_String += "\"Commodity count\":" + Count + ",";
+            JSON_String += "\"Commodity description\":\"" + Entity.getDescription() + "\"}";
+        }
+        JSON_String += "]";
+        return JSON_String;
+    }
+
+    @RequestMapping(value = "/request_2/{id}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String Request2(@PathVariable Long id) {
+        CommodityEntity commodity_entity = commodityService.find(id);
+        String JSON_String = new String();
+        JSON_String = "[";
+        if(commodity_entity != null) {
+            List<SupplyEntity> supply_list = supplyService.getAll();
+            CommodityTypeEntity commodityTypeEntity = commodityTypeService.find(commodity_entity.getType_id());
+            JSON_String += "\"Commodity type\":\"" + commodityTypeEntity.getName() + "\",";
+            JSON_String += "\"Commodity name\":\"" + commodity_entity.getName() + "\",";
+            int Count = 0;
+            for (SupplyEntity SupplyEntity : supply_list) {
+                if (SupplyEntity.getCommodity_id() == commodity_entity.getId()) {
+                    Count++;
+                }
+            }
+            JSON_String += "\"Commodity count\":" + Count + ",";
+            JSON_String += "\"Commodity description\":\"" + commodity_entity.getDescription() + "\"}";
+        }
+        JSON_String += "]";
+        return JSON_String;
+    }
+
 
 }
