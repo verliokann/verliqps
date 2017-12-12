@@ -7,20 +7,20 @@ import javax.persistence.*;
 public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", nullable = false, unique = true)
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "operator_id")
-    private OperatorEntity operator;
+    @JoinColumn(name = "tariff_id", nullable = false)
+    private TariffEntity tariff;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
     public Long getId() {
@@ -31,12 +31,12 @@ public class CustomerEntity {
         this.id = id;
     }
 
-    public OperatorEntity getOperator() {
-        return operator;
+    public TariffEntity getTariff() {
+        return tariff;
     }
 
-    public void setOperator(OperatorEntity operator) {
-        this.operator = operator;
+    public void setTariff(TariffEntity tariff) {
+        this.tariff = tariff;
     }
 
     public String getPhoneNumber() {
@@ -65,17 +65,13 @@ public class CustomerEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         CustomerEntity that = (CustomerEntity) o;
 
         return getId().equals(that.getId()) &&
-                getOperator().equals(that.getOperator()) &&
+                getTariff().equals(that.getTariff()) &&
                 getPhoneNumber().equals(that.getPhoneNumber()) &&
                 getName().equals(that.getName()) &&
                 getAddress().equals(that.getAddress());
@@ -84,7 +80,7 @@ public class CustomerEntity {
     @Override
     public int hashCode() {
         int result = getId().hashCode();
-        result = 31 * result + getOperator().hashCode();
+        result = 31 * result + getTariff().hashCode();
         result = 31 * result + getPhoneNumber().hashCode();
         result = 31 * result + getName().hashCode();
         result = 31 * result + getAddress().hashCode();
@@ -95,7 +91,7 @@ public class CustomerEntity {
     public String toString() {
         return "CustomerEntity{" +
                 "id=" + id +
-                ", operator=" + operator +
+                ", tariff=" + tariff +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +

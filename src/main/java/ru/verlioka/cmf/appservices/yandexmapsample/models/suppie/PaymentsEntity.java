@@ -8,23 +8,18 @@ import java.sql.Date;
 public class PaymentsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id")
+    @Column(name = "payment_id", nullable = false, unique = true)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private CustomerEntity customer;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private Date createdAt = new Date(System.currentTimeMillis());
 
-    @Column(name = "amount")
-    private Integer amount;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = new Date(System.currentTimeMillis());
-    }
+    @Column(name = "amount", nullable = false)
+    private Double amount;
 
     public Long getId() {
         return id;
@@ -50,29 +45,25 @@ public class PaymentsEntity {
         this.createdAt = createdAt;
     }
 
-    public Integer getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         PaymentsEntity that = (PaymentsEntity) o;
 
         return getId().equals(that.getId()) &&
                 getCustomer().equals(that.getCustomer()) &&
                 (getCreatedAt() != null ? getCreatedAt().equals(that.getCreatedAt()) : that.getCreatedAt() == null) &&
-                (getAmount() != null ? getAmount().equals(that.getAmount()) : that.getAmount() == null);
+                getAmount().equals(that.getAmount());
     }
 
     @Override
@@ -80,7 +71,7 @@ public class PaymentsEntity {
         int result = getId().hashCode();
         result = 31 * result + getCustomer().hashCode();
         result = 31 * result + (getCreatedAt() != null ? getCreatedAt().hashCode() : 0);
-        result = 31 * result + (getAmount() != null ? getAmount().hashCode() : 0);
+        result = 31 * result + getAmount().hashCode();
         return result;
     }
 

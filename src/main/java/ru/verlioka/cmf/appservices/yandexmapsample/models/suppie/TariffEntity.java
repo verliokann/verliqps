@@ -7,15 +7,11 @@ import javax.persistence.*;
 public class TariffEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tariff_id")
+    @Column(name = "tariff_id", nullable = false, unique = true)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "operator_id")
-    private OperatorEntity operator;
-
-    @Column(name = "monthly_payment")
-    private Integer monthlyPayment;
+    @Column(name = "monthly_payment", nullable = false)
+    private Double monthlyPayment;
 
     @Column(name = "minutes_per_month")
     private Integer minutesPerMonth = -1;
@@ -28,19 +24,11 @@ public class TariffEntity {
         this.id = id;
     }
 
-    public OperatorEntity getOperator() {
-        return operator;
-    }
-
-    public void setOperator(OperatorEntity operator) {
-        this.operator = operator;
-    }
-
-    public Integer getMonthlyPayment() {
+    public Double getMonthlyPayment() {
         return monthlyPayment;
     }
 
-    public void setMonthlyPayment(Integer monthlyPayment) {
+    public void setMonthlyPayment(Double monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
     }
 
@@ -49,32 +37,30 @@ public class TariffEntity {
     }
 
     public void setMinutesPerMonth(Integer minutesPerMonth) {
-        this.minutesPerMonth = minutesPerMonth;
+        if (minutesPerMonth == null) {
+            this.minutesPerMonth = -1;
+        } else {
+            this.minutesPerMonth = minutesPerMonth;
+        }
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         TariffEntity that = (TariffEntity) o;
 
         return getId().equals(that.getId()) &&
-                getOperator().equals(that.getOperator()) &&
-                (getMonthlyPayment() != null ? getMonthlyPayment().equals(that.getMonthlyPayment()) : that.getMonthlyPayment() == null) &&
-                (getMinutesPerMonth() != null ? getMinutesPerMonth().equals(that.getMinutesPerMonth()) : that.getMinutesPerMonth() == null);
+                getMonthlyPayment().equals(that.getMonthlyPayment()) &&
+                getMinutesPerMonth().equals(that.getMinutesPerMonth());
     }
 
     @Override
     public int hashCode() {
         int result = getId().hashCode();
-        result = 31 * result + getOperator().hashCode();
-        result = 31 * result + (getMonthlyPayment() != null ? getMonthlyPayment().hashCode() : 0);
-        result = 31 * result + (getMinutesPerMonth() != null ? getMinutesPerMonth().hashCode() : 0);
+        result = 31 * result + getMonthlyPayment().hashCode();
+        result = 31 * result + getMinutesPerMonth().hashCode();
         return result;
     }
 
@@ -82,7 +68,6 @@ public class TariffEntity {
     public String toString() {
         return "TariffEntity{" +
                 "id=" + id +
-                ", operator=" + operator +
                 ", monthlyPayment=" + monthlyPayment +
                 ", minutesPerMonth=" + minutesPerMonth +
                 '}';
