@@ -12,6 +12,9 @@ public class BalanceReport {
     private Double debtAmount;
     private Double paymentsAmount;
 
+    public BalanceReport() {
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -62,8 +65,12 @@ public class BalanceReport {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         BalanceReport that = (BalanceReport) o;
 

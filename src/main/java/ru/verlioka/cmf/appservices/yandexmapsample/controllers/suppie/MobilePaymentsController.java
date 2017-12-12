@@ -1,39 +1,47 @@
 package ru.verlioka.cmf.appservices.yandexmapsample.controllers.suppie;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import ru.verlioka.cmf.appservices.yandexmapsample.controllers.suppie.json.BalanceReport;
 import ru.verlioka.cmf.appservices.yandexmapsample.controllers.suppie.json.PaymentsReport;
 import ru.verlioka.cmf.appservices.yandexmapsample.services.suppie.CustomerService;
 
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/suppie")
 public class MobilePaymentsController {
-    private final CustomerService customerService;
+    @Autowired
+    private CustomerService customerService;
 
-    private final ObjectMapper mapper;
-
-    public MobilePaymentsController(CustomerService customerService) {
-        Objects.requireNonNull(customerService);
-
-        this.customerService = customerService;
-
-        this.mapper = new ObjectMapper();
-        this.mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+    public MobilePaymentsController() {
     }
 
-    @RequestMapping("/payments")
-    public List<PaymentsReport> getPaymentReports() {
+    @RequestMapping(value = "/payments", method = RequestMethod.GET)
+    public @ResponseBody
+    List<PaymentsReport> getPaymentReports() {
         return customerService.getPaymentReports();
     }
 
-    @RequestMapping("/balances")
-    public List<BalanceReport> getBalanceReports() {
+    @RequestMapping(value = "/payments/{customerId}", method = RequestMethod.GET)
+    public @ResponseBody
+    List<PaymentsReport> getPaymentReports(@PathVariable Long customerId) {
+        return customerService.getPaymentsReport(customerId);
+    }
+
+    @RequestMapping(value = "/balances", method = RequestMethod.GET)
+    public @ResponseBody
+    List<BalanceReport> getBalanceReports() {
         return customerService.getBalanceReports();
+    }
+
+    @RequestMapping(value = "/balances/{customerId}", method = RequestMethod.GET)
+    public @ResponseBody
+    List<BalanceReport> getBalanceReports(@PathVariable Long customerId) {
+        return customerService.getBalanceReport(customerId);
     }
 }

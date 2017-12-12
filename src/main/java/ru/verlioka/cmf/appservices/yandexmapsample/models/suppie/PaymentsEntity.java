@@ -21,6 +21,9 @@ public class PaymentsEntity {
     @Column(name = "amount", nullable = false)
     private Double amount;
 
+    public PaymentsEntity() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -55,8 +58,12 @@ public class PaymentsEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         PaymentsEntity that = (PaymentsEntity) o;
 

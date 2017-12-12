@@ -23,6 +23,9 @@ public class CustomerEntity {
     @Column(name = "address", nullable = false)
     private String address;
 
+    public CustomerEntity() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -65,8 +68,12 @@ public class CustomerEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         CustomerEntity that = (CustomerEntity) o;
 

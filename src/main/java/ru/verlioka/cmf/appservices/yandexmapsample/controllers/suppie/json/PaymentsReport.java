@@ -9,6 +9,9 @@ public class PaymentsReport {
     private Double paymentsAmount;
     private Integer minutesAmount;
 
+    public PaymentsReport() {
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -59,8 +62,12 @@ public class PaymentsReport {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         PaymentsReport that = (PaymentsReport) o;
 

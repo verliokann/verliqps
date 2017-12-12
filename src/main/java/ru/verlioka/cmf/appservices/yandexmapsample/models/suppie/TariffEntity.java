@@ -16,6 +16,9 @@ public class TariffEntity {
     @Column(name = "minutes_per_month")
     private Integer minutesPerMonth = -1;
 
+    public TariffEntity() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -46,8 +49,12 @@ public class TariffEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         TariffEntity that = (TariffEntity) o;
 
