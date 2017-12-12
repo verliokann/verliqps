@@ -19,6 +19,7 @@ import java.util.*;
 
 @Controller
 @EnableTransactionManagement
+@RequestMapping("/angry")
 public class RequestController {
 
     @Autowired
@@ -65,35 +66,35 @@ public class RequestController {
     @RequestMapping(value = "/request_1", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<String> Request() {
+    String Request() {
         List<SupplyEntity> supply_list = supplyService.getAll();
-        List<String> rlist = new ArrayList<String>();
-
+        String JSON_String = new String();
+        JSON_String = "[";
+        boolean isFirst = true;
         for(SupplyEntity Entity : supply_list) {
             CommodityEntity commodityEntity = commodityService.find(Entity.getCommodity_id());
             ProvidersEntity providersEntity = providersService.find(Entity.getProvider_id());
-
-
-            String newEntry = new String();
-
-            newEntry += commodityEntity.getName() + ", ";
-            newEntry += commodityEntity.getDescription() + ", ";
-            newEntry += commodityEntity.getUnit() + ", ";
-            newEntry += commodityEntity.getPrice() + ", ";
-            newEntry += providersEntity.getName() + ", ";
-            newEntry += providersEntity.getCity() + ", ";
-            newEntry += providersEntity.getCountry() + ", ";
-            newEntry += providersEntity.getPhone() + ", ";
-            newEntry += providersEntity.getFax() + ", ";
-            newEntry += (Entity.isShipments_are_stopped() ? "true" : "false") + ", ";
-            newEntry += Entity.getCount() + ", ";
-            newEntry += Entity.getPrice() + ", ";
-            newEntry += Entity.getDate().toString() + "\n";
-
-            rlist.add(newEntry);
+        if(isFirst)
+            isFirst = false;
+        else
+            JSON_String +=",";
+            JSON_String += "{";
+            JSON_String += "\"Commodity name\":\"" + commodityEntity.getName() + "\",";
+            JSON_String += "\"Commodity description\":\""  +  commodityEntity.getDescription() + "\",";
+            JSON_String += "\"Unit\":\"" +  commodityEntity.getUnit() +"\",";
+            JSON_String += "\"Price per unit\":\"" +  commodityEntity.getPrice() +"\",";
+            JSON_String += "\"Provider\":\"" +  providersEntity.getName() +"\",";
+            JSON_String += "\"City\":\"" +  providersEntity.getCity() +"\",";
+            JSON_String += "\"Country\":\"" +  providersEntity.getCountry() +"\",";
+            JSON_String += "\"Phone\":\"" +  providersEntity.getPhone() +"\",";
+            JSON_String += "\"Fax\":\"" +  providersEntity.getFax() +"\",";
+            JSON_String += "\"Is shipments are stopped?\":\"" +  (Entity.isShipments_are_stopped() ? "true" : "false") +"\",";
+            JSON_String += "\"Count\":\"" +  Entity.getCount() +"\",";
+            JSON_String += "\"Price\":\"" +  Entity.getPrice() +"\",";
+            JSON_String += "\"Shipment time\":\"" +  Entity.getDate().toString() + "\"}";
         }
-
-        return rlist;
+        JSON_String += "]";
+        return JSON_String;
     }
 
 }
