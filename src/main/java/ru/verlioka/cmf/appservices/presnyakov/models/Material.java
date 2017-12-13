@@ -29,8 +29,9 @@ public class Material {
     @Column( name = "date_of_receiving" )
     private Date date_of_receiving;
 
-    @Column( name = "provider_id" )
-    private Long provider_id;
+    @ManyToOne
+    @JoinColumn( name = "provider_id" )
+    private Provider provider;
 
     public Long getId() {
         return id;
@@ -50,7 +51,7 @@ public class Material {
                 ", unit='" + unit + '\'' +
                 ", unit_price=" + unit_price +
                 ", date_of_receiving=" + date_of_receiving +
-                ", provider_id=" + provider_id +
+                ", provider=" + provider +
                 '}';
     }
 
@@ -70,7 +71,7 @@ public class Material {
         if (unit_price != null ? !unit_price.equals(material.unit_price) : material.unit_price != null) return false;
         if (date_of_receiving != null ? !date_of_receiving.equals(material.date_of_receiving) : material.date_of_receiving != null)
             return false;
-        return provider_id != null ? provider_id.equals(material.provider_id) : material.provider_id == null;
+        return provider != null ? provider.equals(material.provider) : material.provider == null;
     }
 
     @Override
@@ -82,7 +83,7 @@ public class Material {
         result = 31 * result + (unit != null ? unit.hashCode() : 0);
         result = 31 * result + (unit_price != null ? unit_price.hashCode() : 0);
         result = 31 * result + (date_of_receiving != null ? date_of_receiving.hashCode() : 0);
-        result = 31 * result + (provider_id != null ? provider_id.hashCode() : 0);
+        result = 31 * result + (provider != null ? provider.hashCode() : 0);
         return result;
     }
 
@@ -134,11 +135,11 @@ public class Material {
         this.date_of_receiving = date_of_receiving;
     }
 
-    public Long getProvider_id() {
-        return provider_id;
+    public Provider getProvider() {
+        return provider;
     }
 
-    public void setProvider_id(Long provider_id) {
-        this.provider_id = provider_id;
+    public void setProvider(Provider provider_id) {
+        this.provider = provider_id;
     }
 }

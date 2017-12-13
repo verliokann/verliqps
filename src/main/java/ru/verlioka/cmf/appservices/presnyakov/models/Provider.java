@@ -16,8 +16,9 @@ public class Provider {
     @Column( name = "director" )
     private String director;
 
-    @Column( name = "city_id" )
-    private Long city_id;
+    @ManyToOne
+    @JoinColumn( name = "city_id" )
+    private City city;
 
     @Override
     public String toString() {
@@ -25,7 +26,7 @@ public class Provider {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", director='" + director + '\'' +
-                ", city_id=" + city_id +
+                ", city=" + city +
                 '}';
     }
 
@@ -39,7 +40,7 @@ public class Provider {
         if (id != null ? !id.equals(provider.id) : provider.id != null) return false;
         if (name != null ? !name.equals(provider.name) : provider.name != null) return false;
         if (director != null ? !director.equals(provider.director) : provider.director != null) return false;
-        return city_id != null ? city_id.equals(provider.city_id) : provider.city_id == null;
+        return city != null ? city.equals(provider.city) : provider.city == null;
     }
 
     @Override
@@ -47,7 +48,7 @@ public class Provider {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (director != null ? director.hashCode() : 0);
-        result = 31 * result + (city_id != null ? city_id.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
         return result;
     }
 
@@ -75,12 +76,12 @@ public class Provider {
         this.director = director;
     }
 
-    public Long getCity_id() {
-        return city_id;
+    public City getCity() {
+        return city;
     }
 
-    public void setCity_id(Long city_id) {
-        this.city_id = city_id;
+    public void setCity(City city_id) {
+        this.city = city_id;
     }
 
 
