@@ -1,16 +1,22 @@
 package ru.verlioka.cmf.appservices.angry.controllers;
 
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaQuery;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.LongType;
+import org.hibernate.type.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ru.verlioka.cmf.appservices.angry.controllers.Criteria.CriteriaRequest1;
+import ru.verlioka.cmf.appservices.angry.controllers.Criteria.CriteriaRequest2;
 import ru.verlioka.cmf.appservices.angry.model.CommodityEntity;
 import ru.verlioka.cmf.appservices.angry.model.CommodityTypeEntity;
 import ru.verlioka.cmf.appservices.angry.model.ProvidersEntity;
@@ -116,8 +122,61 @@ public class RequestController {
         Query query = session.createQuery(hql_request_2);
         return query.list();
     }
-    
 
+    @RequestMapping(value = "/request_criteria_1", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List Request1_criteria() {
+        Session session = ((Session)entityManager.getDelegate()).getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(SupplyEntity.class,"supply");
+
+        criteria.createAlias("supply.commodity","commodity");
+        criteria.createAlias("supply.provider","provider");
+
+        criteria.setProjection(
+                Projections.projectionList()
+                        .add(Projections.property("commodity.name"),"commodity_name")
+                        .add(Projections.property("commodity.description"),"commodity_description")
+                        .add(Projections.property("commodity.unit"),"commodity_unit")
+                        .add(Projections.property("commodity.price"),"commodity_price")
+                        .add(Projections.property("provider.name"),"provider_name")
+                        .add(Projections.property("provider.city"),"provider_country")
+                        .add(Projections.property("provider.country"),"provider_city")
+                        .add(Projections.property("provider.phone"),"provider_phone")
+                        .add(Projections.property("provider.fax"),"provider_fax")
+                        .add(Projections.property("supply.shipments_are_stopped"),"supply_shipments_are_stopped")
+                        .add(Projections.property("supply.count"),"supply_count")
+                        .add(Projections.property("supply.price"),"supply_price")
+                        .add(Projections.property("supply.date"),"supply_date")
+        );
+
+        criteria.setResultTransformer(Transformers.aliasToBean(CriteriaRequest1.class));
+        return criteria.list();
+    }
+
+    @RequestMapping(value = "/request_criteria_2", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List Request2_criteria() {
+        Session session = ((Session)entityManager.getDelegate()).getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(CommodityEntity.class,"commodity");
+
+        criteria.createAlias("commodity.type","type");
+        criteria.setProjection(
+                Projections.projectionList()
+                        .add(Projections.property("type.name"),"type_name")
+                        .add(Projections.property("commodity.name"),"commodity_name")
+                        .add(Projections.property("commodity.description"),"commodity_description")
+                        .add(Projections.sqlProjection(
+                                "(select SUM(entry.count) from supply as entry where entry.commodity_id = this_.id) as commodity_count",
+                                new String[]{"commodity_count"},
+                                new Type[]{new LongType()}),
+                                "commodity_count")
+        );
+
+        criteria.setResultTransformer(Transformers.aliasToBean(CriteriaRequest2.class));
+        return criteria.list();
+    }
 
 
 }
