@@ -12,11 +12,13 @@ public class SupplyEntity {
     @Column( name = "id" )
     private Long id;
 
-    @Column( name = "commodity_id" )
-    private Long commodity_id;
+    @ManyToOne
+    @JoinColumn( name = "commodity_id" )
+    private CommodityEntity commodity;
 
-    @Column( name = "provider_id" )
-    private Long provider_id;
+    @ManyToOne
+    @JoinColumn( name = "provider_id" )
+    private ProvidersEntity provider;
 
     @Column( name = "date" )
     private Date date;
@@ -38,20 +40,20 @@ public class SupplyEntity {
         this.id = id;
     }
 
-    public Long getCommodity_id() {
-        return commodity_id;
+    public CommodityEntity getCommodity() {
+        return commodity;
     }
 
-    public void setCommodity_id(Long commodity_id) {
-        this.commodity_id = commodity_id;
+    public void setCommodity(CommodityEntity commodity) {
+        this.commodity = commodity;
     }
 
-    public Long getProvider_id() {
-        return provider_id;
+    public ProvidersEntity getProvider() {
+        return provider;
     }
 
-    public void setProvider_id(Long provider_id) {
-        this.provider_id = provider_id;
+    public void setProvider(ProvidersEntity provider) {
+        this.provider = provider;
     }
 
     public Date getDate() {
@@ -90,8 +92,8 @@ public class SupplyEntity {
     public String toString() {
         return "SupplyEntity{" +
                 "id=" + id +
-                ", commodity_id=" + commodity_id +
-                ", provider_id=" + provider_id +
+                ", commodity=" + commodity +
+                ", provider=" + provider +
                 ", date=" + date +
                 ", count=" + count +
                 ", price=" + price +

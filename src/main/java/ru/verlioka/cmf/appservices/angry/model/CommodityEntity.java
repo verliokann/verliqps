@@ -10,8 +10,9 @@ public class CommodityEntity {
     @Column( name = "id" )
     private Long id;
 
-    @Column( name = "type_id" )
-    private Long type_id;
+    @ManyToOne
+    @JoinColumn( name = "type_id" )
+    private CommodityTypeEntity type;
 
     @Column( name = "name" )
     private String name;
@@ -33,12 +34,12 @@ public class CommodityEntity {
         this.id = id;
     }
 
-    public Long getType_id() {
-        return type_id;
+    public CommodityTypeEntity getType() {
+        return type;
     }
 
-    public void setType_id(Long type_id) {
-        this.type_id = type_id;
+    public void setType(CommodityTypeEntity type) {
+        this.type = type;
     }
 
     public String getName() {
@@ -77,7 +78,7 @@ public class CommodityEntity {
     public String toString() {
         return "CommodityEntity{" +
                 "id=" + id +
-                ", type_id=" + type_id +
+                ", type=" + type +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", unit='" + unit + '\'' +

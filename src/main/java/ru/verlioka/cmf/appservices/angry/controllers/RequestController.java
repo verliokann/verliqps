@@ -1,5 +1,9 @@
 package ru.verlioka.cmf.appservices.angry.controllers;
 
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -16,12 +20,17 @@ import ru.verlioka.cmf.appservices.angry.services.concrete.CommodityTypeService;
 import ru.verlioka.cmf.appservices.angry.services.concrete.ProvidersService;
 import ru.verlioka.cmf.appservices.angry.services.concrete.SupplyService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.*;
 
 @Controller
 @EnableTransactionManagement
 @RequestMapping("/angry")
 public class RequestController {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     private CommodityService commodityService;
@@ -31,6 +40,32 @@ public class RequestController {
     private ProvidersService providersService;
     @Autowired
     private SupplyService supplyService;
+
+    private String hql_request_1 = "select \n" +
+            "\tcommodity.name as Commodity_name,\n" +
+            "\tcommodity.description as Commodity_description,\n" +
+            "\tcommodity.unit as Unit,\n" +
+            "\tcommodity.price as Price_per_unit,\n" +
+            "\tprovider.name as Provider_name,\n" +
+            "\tprovider.city as Provider_city,\n" +
+            "\tprovider.country as Provider_country,\n" +
+            "\tprovider.phone as Provider_phone,\n" +
+            "\tprovider.fax as Provider_fax,\n" +
+            "\tsupply.shipments_are_stopped as  Supply_isShipments_are_stopped,\n" +
+            "\tsupply.count as Supply_count,\n" +
+            "\tsupply.price as Supply_price,\n" +
+            "\tsupply.date as Supply_date\n" +
+            "from SupplyEntity as supply \n" +
+            "inner join supply.commodity as commodity \n" +
+            "inner join supply.provider as provider";
+
+    private String hql_request_2 = "select \n" +
+            "\ttype.name as CommodityType_name,\n" +
+            "\tcommodity.name as Commodity_name,\n" +
+            "\tcommodity.description as Commodity_description,\n" +
+            "\t(select sum(supply.count) from SupplyEntity as supply where supply.commodity = commodity)\n" +
+            "from CommodityEntity as commodity\n" +
+            "inner join commodity.type as type";
 
     @RequestMapping(value = "/commodity_table", method = RequestMethod.GET)
     public
@@ -64,85 +99,25 @@ public class RequestController {
         return rlist;
     }
 
-    @RequestMapping(value = "/request_1", method = RequestMethod.GET)
+    @RequestMapping(value = "/request_hql_1", method = RequestMethod.GET)
     public
     @ResponseBody
-    String Request1() {
-        List<SupplyEntity> supply_list = supplyService.getAll();
-        String JSON_String = new String();
-        JSON_String = "[";
-        boolean isFirst = true;
-        for(SupplyEntity Entity : supply_list) {
-            CommodityEntity commodityEntity = commodityService.find(Entity.getCommodity_id());
-            ProvidersEntity providersEntity = providersService.find(Entity.getProvider_id());
-        if(isFirst) isFirst = false; else JSON_String +=",";
-            JSON_String += "{";
-            JSON_String += "\"Commodity name\":\"" + commodityEntity.getName() + "\",";
-            JSON_String += "\"Commodity description\":\""  +  commodityEntity.getDescription() + "\",";
-            JSON_String += "\"Unit\":\"" +  commodityEntity.getUnit() +"\",";
-            JSON_String += "\"Price per unit\":\"" +  commodityEntity.getPrice() +"\",";
-            JSON_String += "\"Provider\":\"" +  providersEntity.getName() +"\",";
-            JSON_String += "\"City\":\"" +  providersEntity.getCity() +"\",";
-            JSON_String += "\"Country\":\"" +  providersEntity.getCountry() +"\",";
-            JSON_String += "\"Phone\":\"" +  providersEntity.getPhone() +"\",";
-            JSON_String += "\"Fax\":\"" +  providersEntity.getFax() +"\",";
-            JSON_String += "\"Is shipments are stopped?\":\"" +  (Entity.isShipments_are_stopped() ? "true" : "false") +"\",";
-            JSON_String += "\"Count\":\"" +  Entity.getCount() +"\",";
-            JSON_String += "\"Price\":\"" +  Entity.getPrice() +"\",";
-            JSON_String += "\"Shipment time\":\"" +  Entity.getDate().toString() + "\"}";
-        }
-        JSON_String += "]";
-        return JSON_String;
+    List Request1_hql() {
+        Session session = ((Session)entityManager.getDelegate()).getSessionFactory().openSession();
+        Query query = session.createQuery(hql_request_1);
+        return query.list();
     }
 
-    @RequestMapping(value = "/request_2", method = RequestMethod.GET)
+    @RequestMapping(value = "/request_hql_2", method = RequestMethod.GET)
     public
     @ResponseBody
-    String Request2() {
-        List<CommodityEntity> commodity_list = commodityService.getAll();
-        List<SupplyEntity> supply_list = supplyService.getAll();
-
-        String JSON_String = new String();
-        JSON_String = "[";
-        boolean isFirst = true;
-        for(CommodityEntity Entity : commodity_list) {
-            CommodityTypeEntity commodityTypeEntity = commodityTypeService.find(Entity.getType_id());
-            if(isFirst) isFirst = false; else JSON_String +=",";
-            JSON_String += "\"Commodity type\":\"" + commodityTypeEntity.getName() + "\",";
-            JSON_String += "\"Commodity name\":\"" + Entity.getName() + "\",";
-            int Count = 0;
-            for(SupplyEntity SupplyEntity : supply_list) {if(SupplyEntity.getCommodity_id() == Entity.getId()){Count++;}}
-            JSON_String += "\"Commodity count\":" + Count + ",";
-            JSON_String += "\"Commodity description\":\"" + Entity.getDescription() + "\"}";
-        }
-        JSON_String += "]";
-        return JSON_String;
+    List Request2_hql() {
+        Session session = ((Session)entityManager.getDelegate()).getSessionFactory().openSession();
+        Query query = session.createQuery(hql_request_2);
+        return query.list();
     }
+    
 
-    @RequestMapping(value = "/request_2/{id}", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    String Request2(@PathVariable Long id) {
-        CommodityEntity commodity_entity = commodityService.find(id);
-        String JSON_String = new String();
-        JSON_String = "[";
-        if(commodity_entity != null) {
-            List<SupplyEntity> supply_list = supplyService.getAll();
-            CommodityTypeEntity commodityTypeEntity = commodityTypeService.find(commodity_entity.getType_id());
-            JSON_String += "\"Commodity type\":\"" + commodityTypeEntity.getName() + "\",";
-            JSON_String += "\"Commodity name\":\"" + commodity_entity.getName() + "\",";
-            int Count = 0;
-            for (SupplyEntity SupplyEntity : supply_list) {
-                if (SupplyEntity.getCommodity_id() == commodity_entity.getId()) {
-                    Count++;
-                }
-            }
-            JSON_String += "\"Commodity count\":" + Count + ",";
-            JSON_String += "\"Commodity description\":\"" + commodity_entity.getDescription() + "\"}";
-        }
-        JSON_String += "]";
-        return JSON_String;
-    }
 
 
 }
