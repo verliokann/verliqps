@@ -1,0 +1,26 @@
+{
+  "vouchers":[
+    {
+      "id":1,
+      "cost":40000.0,
+      "fullCost":44000.0
+    },
+    {
+      "id":2,
+      "cost":30000.0,
+      "fullCost":33000.0
+    },
+    {
+      "id":3,
+      "cost":30500.0,
+      "fullCost":33550.0
+    },
+    {
+      "id":4,
+      "cost":45000.0,
+      "fullCost":49500.00000000001
+    }
+  ],
+  "overallCost":145500.0,
+  "overallFullCost":160050.0
+}
