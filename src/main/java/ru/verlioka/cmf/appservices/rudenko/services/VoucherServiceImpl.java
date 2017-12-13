@@ -10,6 +10,7 @@ import ru.verlioka.cmf.appservices.rudenko.dao.interfaces.VoucherDao;
 import ru.verlioka.cmf.appservices.rudenko.models.VoucherEntity;
 import ru.verlioka.cmf.core.services.generic.db.GenericServiceImpl;
 
+import javax.persistence.Query;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,10 +46,12 @@ public class VoucherServiceImpl extends GenericServiceImpl<VoucherEntity, Long> 
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<VouchersWithVisaRequired> getVouchersWithVisaRequired() {
-        return getVoucherDao().getAll()
-                .stream()
-                .map(obj -> (VoucherEntity) obj)
+        Query q = getVoucherDao().getEntityManager().createQuery("from VoucherEntity");
+        List<VoucherEntity> v = (List<VoucherEntity>) q.getResultList();
+
+        return v.stream()
                 .filter(voucher -> voucher.getHotel().getCountry().getVisaRequired())
                 .map(voucher -> {
                     VouchersWithVisaRequired result = new VouchersWithVisaRequired();
