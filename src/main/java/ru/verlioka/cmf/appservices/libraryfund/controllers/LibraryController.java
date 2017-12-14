@@ -32,5 +32,15 @@ public class LibraryController {
     }
 
 
+    @RequestMapping(value = "/allBooksQuery", method = RequestMethod.GET)
+    public @ResponseBody List getAllBooksQuery() {
+        return libraryService.getAllBooksQuery();
+    }
+
+
+    @RequestMapping(value = "/allBooksCriteria", method = RequestMethod.GET)
+    public @ResponseBody List getAllBooksCriteria() {
+        return libraryService.getAllBooksCriteria();
+    }
 
 }

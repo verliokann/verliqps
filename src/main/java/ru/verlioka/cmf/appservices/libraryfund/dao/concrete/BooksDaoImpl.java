@@ -4,7 +4,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.jpa.internal.QueryImpl;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
+import ru.verlioka.cmf.appservices.libraryfund.controllers.response.BookResponse;
+import ru.verlioka.cmf.appservices.libraryfund.controllers.response.SeriesResponse;
 import ru.verlioka.cmf.appservices.libraryfund.models.BookSeries;
 import ru.verlioka.cmf.appservices.libraryfund.models.Books;
 import ru.verlioka.cmf.core.dao.generic.GenericDaoImpl;
@@ -32,17 +36,18 @@ public class BooksDaoImpl extends GenericDaoImpl<Books, Long>
         Session session = ((Session) em.getDelegate()).getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Books.class, "book");
         criteria.createAlias("book.bookSeries", "series");
+        criteria.createAlias("book.author", "author");
         criteria.setProjection(Projections.projectionList()
                 .add(Projections.property("series.id"), "id")
                 .add(Projections.property("series.seriesName"), "seriesName")
-                .add(Projections.property("book.name"), "name")
-                .add(Projections.property("series.author"), "author")
+                .add(Projections.property("book.name"), "bookName")
+                .add(Projections.property("author.firstName"), "authorName")
                 .add(Projections.property("series.bookNum"), "bookNum")
                 .add(Projections.property("series.batchNumber"), "batchNumber")
                 .add(Projections.property("series.receiptDate"), "receiptDate")
         );
         criteria.add(Restrictions.eq("book.id", bookId));
-
+        criteria.setResultTransformer(Transformers.aliasToBean(SeriesResponse.class));
         return criteria.list();
 
     }
@@ -55,10 +60,10 @@ public class BooksDaoImpl extends GenericDaoImpl<Books, Long>
     }
 
     @Override
-    public List getBookByIdQuery(Long bookId) {
-        Query query = em.createQuery("from Books where id = :id");
+    public BookResponse getBookByIdQuery(Long bookId) {
+        Query query = em.createQuery("from Books where id = :id", Books.class);
         query.setParameter("id", bookId);
-        return query.getResultList();
+        return (BookResponse) query.getResultList();
     }
 
     @Override
@@ -84,12 +89,15 @@ public class BooksDaoImpl extends GenericDaoImpl<Books, Long>
         Session session = ((Session) em.getDelegate()).getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Books.class, "book");
         criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("book.name"), "name")
-                .add(Projections.property("book.id"), "id")
+                .add(Projections.property("book.name"), "bookName")
+                .add(Projections.property("book.id"), "bookNumber")
                 .add(Projections.property("book.author"), "author")
-                .add(Projections.property("book.publish_date"), "publish_date")
+                .add(Projections.property("book.publish_date"), "publishDate")
                 .add(Projections.property("book.publisher_name"), "publisher")
         );
+        criteria.setResultTransformer(Transformers.aliasToBean(BookResponse.class));
         return criteria;
     }
+
+
 }

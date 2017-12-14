@@ -94,5 +94,13 @@ public class LibraryServiceImpl extends GenericServiceImpl<Books, Long>
         return booksDao.getBookSeriesByBookCriteria(bookId);
     }
 
+    @Override
+    public List getAllBooksQuery() {
+        return booksDao.getAllBooksQuery();
+    }
 
+    @Override
+    public List getAllBooksCriteria() {
+        return booksDao.getAllBooksCriteria();
+    }
 }

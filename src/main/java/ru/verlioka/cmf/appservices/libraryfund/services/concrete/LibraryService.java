@@ -24,4 +24,7 @@ public interface LibraryService extends IGenericService<Books, Long> {
 
     List getBookSeriesByBookCriteria(Long bookId);
 
+    List getAllBooksQuery();
+    List getAllBooksCriteria();
+
 }
