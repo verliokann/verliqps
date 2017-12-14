@@ -7,9 +7,10 @@ import ru.verlioka.cmf.core.services.generic.db.IGenericService;
 import java.util.List;
 
 public interface NegotiationsService extends IGenericService<NegotiationsTable, Long> {
-    List<NegotiationsTable> getAllNegotiations();
-    NegotiationsTable getNegotiation(Long id);
 
-    List<SubscribeTable> getAllSubscribers();
-    List<SubscribeTable> getSubscribersByNegotiation(Long id);
+    List getSubscribersByNegotiationQuery(Long id);
+    List getSubscribeByNegotiationCriteria(Long id);
+
+    List getNegotiationsQuery(Long id);
+    List getNegotiationCriteria(Long id);
 }

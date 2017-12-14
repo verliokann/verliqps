@@ -13,13 +13,5 @@ import java.util.List;
 
 public class SubscribeDaoImpl extends GenericDaoImpl<SubscribeTable, Long>
         implements SubscribeDao {
-    @PersistenceContext
-    private EntityManager em;
 
-    @Override
-    public List<SubscribeTable> getSubscribeByNegotiation(Long id) {
-        Query query = em.createQuery("from SubscrierTable where negotiations.id = :id");
-        query.setParameter("id", id);
-        return query.getResultList();
-    }
 }

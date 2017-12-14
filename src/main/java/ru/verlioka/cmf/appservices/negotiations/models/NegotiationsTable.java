@@ -34,10 +34,6 @@ public class NegotiationsTable {
     @Column(name = "tarrif")
     private String Tarrif;
 
-    @ManyToOne
-    @JoinColumn(name = "id_subscribe")
-    private SubscribeTable subscribe;
-
 
     public Long getId() {
         return id;
@@ -103,11 +99,5 @@ public class NegotiationsTable {
         Cost = cost;
     }
 
-    public SubscribeTable getSubscribe() {
-        return subscribe;
-    }
 
-    public void setSubscribe(SubscribeTable subscribe) {
-        this.subscribe = subscribe;
-    }
 }

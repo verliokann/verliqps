@@ -9,7 +9,7 @@ public class SubscribeTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_subscribe")
+    @Column(name = "id_subscriber")
     private Long id;
 
     @Column(name = "name")
@@ -18,7 +18,7 @@ public class SubscribeTable {
     @Column( name = "surname" )
     private String Surname;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_negotiations")
     private NegotiationsTable negotiations;
 

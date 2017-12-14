@@ -20,7 +20,10 @@ public class NegotiationsServiceImpl extends GenericServiceImpl<NegotiationsTabl
 
 
     @Autowired
-    SubscribeDao subscribeDao;
+    private SubscribeDao subscribeDao;
+
+    @Autowired
+    private NegotiationsDao negotiationsDao;
 
     public NegotiationsServiceImpl() {
     }
@@ -30,24 +33,23 @@ public class NegotiationsServiceImpl extends GenericServiceImpl<NegotiationsTabl
         super(genericDao);
     }
 
-
     @Override
-    public List<NegotiationsTable> getAllNegotiations() {
-        return getAll();
+    public List getSubscribersByNegotiationQuery(Long id) {
+        return negotiationsDao.getSubscribeByNegotiationQuery(id);
     }
 
     @Override
-    public NegotiationsTable getNegotiation(Long id) {
-        return find(id);
+    public List getSubscribeByNegotiationCriteria(Long id) {
+        return negotiationsDao.getSubscribeByNegotiationCriteria(id);
     }
 
     @Override
-    public List<SubscribeTable> getAllSubscribers() {
-        return subscribeDao.getAll();
+    public List getNegotiationsQuery(Long id) {
+        return negotiationsDao.getNegotiationsQuery(id);
     }
 
     @Override
-    public List<SubscribeTable> getSubscribersByNegotiation(Long id) {
-        return subscribeDao.getSubscribeByNegotiation(id);
+    public List getNegotiationCriteria(Long id) {
+        return negotiationsDao.getNegotiationCriteria(id);
     }
 }
