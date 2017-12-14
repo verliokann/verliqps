@@ -15,6 +15,7 @@ public class VirtualObjectServiceImpl extends GenericServiceImpl<VirtualObject, 
     public VirtualObjectServiceImpl() {
     }
 
+
     @Autowired
     public VirtualObjectServiceImpl(VirtualObjectDao genericDao) {
         super(genericDao);

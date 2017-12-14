@@ -2,9 +2,7 @@ package ru.verlioka.cmf.appservices.libraryfund.models;
 
 
 import javax.persistence.*;
-import java.awt.print.Book;
 import java.sql.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "book_series")
@@ -13,21 +11,17 @@ public class BookSeries {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "series_id")
-    private int id;
+    private Long id;
 
     @Column(name = "series_num")
-    private int seriesNum;
-
-    @OneToMany
-    @JoinColumn(name = "book_id")
-    private List<Book> books;
+    private Long seriesNum;
 
     @OneToOne
     @JoinColumn(name = "author_id")
     private Author author;
 
     @Column(name = "batch_number")
-    private int batchNumber;
+    private Long batchNumber;
 
     @Column(name = "receipt_date")
     private Date receiptDate;
@@ -35,32 +29,26 @@ public class BookSeries {
     @Column(name = "series_name")
     private String seriesName;
 
+    @Column(name = "book_num")
+    private Long bookNum;
+
     public BookSeries() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getSeriesNum() {
+    public Long getSeriesNum() {
         return seriesNum;
     }
 
-    public void setSeriesNum(int seriesNum) {
+    public void setSeriesNum(Long seriesNum) {
         this.seriesNum = seriesNum;
-    }
-
-
-    public List<Book> getBook() {
-        return books;
-    }
-
-    public void setBook(List<Book> books) {
-        this.books = books;
     }
 
     public Author getAuthor() {
@@ -71,11 +59,11 @@ public class BookSeries {
         this.author = author;
     }
 
-    public int getBatchNumber() {
+    public Long getBatchNumber() {
         return batchNumber;
     }
 
-    public void setBatchNumber(int batchNumber) {
+    public void setBatchNumber(Long batchNumber) {
         this.batchNumber = batchNumber;
     }
 
@@ -93,5 +81,13 @@ public class BookSeries {
 
     public void setSeriesName(String seriesName) {
         this.seriesName = seriesName;
+    }
+
+    public Long getBookNum() {
+        return bookNum;
+    }
+
+    public void setBookNum(Long bookNum) {
+        this.bookNum = bookNum;
     }
 }

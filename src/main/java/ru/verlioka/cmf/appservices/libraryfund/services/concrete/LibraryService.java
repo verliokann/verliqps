@@ -8,16 +8,20 @@ import ru.verlioka.cmf.core.services.generic.db.IGenericService;
 
 import java.util.List;
 
-public interface LibraryService extends IGenericService<Books, Integer> {
+public interface LibraryService extends IGenericService<Books, Long> {
 
     List<Books> getAllBooks();
-    Books getBook(int bookId);
+    Books getBook(Long bookId);
 
     List<BookSeries> getAllBookSeries();
-    BookSeries getBookSeries(int bookId);
+    BookSeries getBookSeries(Long bookId);
 
     void addBooks(List<Books> books);
 
     void addAuthor(Author author);
+
+    List getBookSeriesByBookQuery(Long bookId);
+
+    List getBookSeriesByBookCriteria(Long bookId);
 
 }
