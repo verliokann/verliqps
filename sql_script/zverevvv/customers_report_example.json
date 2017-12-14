@@ -1,0 +1,38 @@
+[
+  {
+    "bankBranchAddress": "Ижорская ул., 4, Нижний Новгород, Нижегородская обл., 603006",
+    "bankBranchDetails": "БИК 0564546559",
+    "clientName": "Василий Зверев",
+    "clientAccount": "1216 5460 1554 4569",
+    "clientAmount": 5,
+    "depositName": "выгодный",
+    "dateOfDeposit": 1504213200000
+  },
+  {
+    "bankBranchAddress": "пл. Максима Горького, 2, Нижний Новгород, Нижегородская обл., 603000",
+    "bankBranchDetails": "БИК 45789686",
+    "clientName": "Петя Пупкин",
+    "clientAccount": "9856 2564 8547 9652",
+    "clientAmount": 56984,
+    "depositName": "молодежный",
+    "dateOfDeposit": 1441832400000
+  },
+  {
+    "bankBranchAddress": "ул. Белинского, 61, Нижний Новгород, Нижегородская обл., 603006",
+    "bankBranchDetails": "БИК 89565485",
+    "clientName": "Александр Кочнев",
+    "clientAccount": "6548 2563 4584",
+    "clientAmount": 999999,
+    "depositName": "пенсионный",
+    "dateOfDeposit": 1223150400000
+  },
+  {
+    "bankBranchAddress": "ул. Белинского, 61, Нижний Новгород, Нижегородская обл., 603006",
+    "bankBranchDetails": "БИК 89565485",
+    "clientName": "Леонид Бахров",
+    "clientAccount": "4562 8596 4586 5967",
+    "clientAmount": 5698,
+    "depositName": "пенсионный",
+    "dateOfDeposit": 1254772800000
+  }
+]

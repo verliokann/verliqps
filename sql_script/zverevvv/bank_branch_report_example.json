@@ -1,0 +1,38 @@
+[
+  {
+    "clientName": "Василий Зверев",
+    "clientAccount": "1216 5460 1554 4569",
+    "depositData": 1504213200000,
+    "clientAmount": 5,
+    "depositPercent": 0.05,
+    "depositDuration": 3600,
+    "bankBranchNumber": 1
+  },
+  {
+    "clientName": "Петя Пупкин",
+    "clientAccount": "9856 2564 8547 9652",
+    "depositData": 1441832400000,
+    "clientAmount": 56984,
+    "depositPercent": 150.0,
+    "depositDuration": 2,
+    "bankBranchNumber": 5
+  },
+  {
+    "clientName": "Александр Кочнев",
+    "clientAccount": "6548 2563 4584",
+    "depositData": 1223150400000,
+    "clientAmount": 999999,
+    "depositPercent": 50.0,
+    "depositDuration": 300,
+    "bankBranchNumber": 2
+  },
+  {
+    "clientName": "Леонид Бахров",
+    "clientAccount": "4562 8596 4586 5967",
+    "depositData": 1254772800000,
+    "clientAmount": 5698,
+    "depositPercent": 50.0,
+    "depositDuration": 300,
+    "bankBranchNumber": 2
+  }
+]
