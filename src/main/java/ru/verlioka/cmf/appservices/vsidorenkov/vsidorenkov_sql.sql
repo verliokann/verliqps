@@ -12,8 +12,8 @@ SET default_with_oids = false;
 CREATE TABLE clients (
     id bigint NOT NULL,
     fio character varying(255),
-    address character varying(255),
-    phone character varying(255)
+    phone character varying(255),
+    address character varying(255)
 );
 
 CREATE SEQUENCE clients_id_seq
@@ -86,8 +86,8 @@ ALTER SEQUENCE productstock_id_seq OWNED BY productstock.id;
 
 CREATE TABLE producttype (
     id bigint NOT NULL,
-    name character varying(255),
-    type character varying(255)
+    type character varying(255),
+    name character varying(255)
 );
 
 CREATE SEQUENCE producttype_id_seq

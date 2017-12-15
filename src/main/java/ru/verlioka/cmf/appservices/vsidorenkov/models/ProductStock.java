@@ -11,8 +11,9 @@ public class ProductStock {
     @Column( name = "id" )
     private Long id;
 
-    @Column( name = "producttypeid" )
-    private int producttypeid;
+    @ManyToOne
+    @JoinColumn( name = "producttypeid" )
+    private ProductType producttype;
 
     public Long getId() {
         return id;
@@ -22,12 +23,12 @@ public class ProductStock {
         this.id = id;
     }
 
-    public int getProducttypeid() {
-        return producttypeid;
+    public ProductType getProducttype() {
+        return producttype;
     }
 
-    public void setProducttypeid(int producttypeid) {
-        this.producttypeid = producttypeid;
+    public void setProducttype(ProductType producttype) {
+        this.producttype = producttype;
     }
 
     @Override
@@ -37,14 +38,14 @@ public class ProductStock {
 
         ProductStock that = (ProductStock) o;
 
-        if (getProducttypeid() != that.getProducttypeid()) return false;
-        return getId() != null ? getId().equals(that.getId()) : that.getId() == null;
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        return getProducttype() != null ? getProducttype().equals(that.getProducttype()) : that.getProducttype() == null;
     }
 
     @Override
     public int hashCode() {
         int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + getProducttypeid();
+        result = 31 * result + (getProducttype() != null ? getProducttype().hashCode() : 0);
         return result;
     }
 
@@ -52,7 +53,7 @@ public class ProductStock {
     public String toString() {
         return "ProductStock{" +
                 "id=" + id +
-                ", producttypeid=" + producttypeid +
+                ", producttype=" + producttype +
                 '}';
     }
 }

@@ -9,4 +9,6 @@ import java.util.List;
 public interface OrdersService extends IGenericService<Orders, Long> {
     public List GetRequest1();
     public List GetRequest2();
+    public List GetCriteriaRequest1();
+    public List GetCriteriaRequest2();
 }

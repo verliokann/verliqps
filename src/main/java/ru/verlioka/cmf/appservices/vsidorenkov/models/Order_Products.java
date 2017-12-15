@@ -11,11 +11,13 @@ public class Order_Products {
     @Column( name = "id" )
     private Long id;
 
-    @Column( name = "orderid" )
-    private int orderid;
+    @ManyToOne
+    @JoinColumn( name = "orderid" )
+    private Orders order;
 
-    @Column( name = "productstockid" )
-    private int productstockid;
+    @ManyToOne
+    @JoinColumn( name = "productstockid" )
+    private ProductStock productstock;
 
     public Long getId() {
         return id;
@@ -25,20 +27,20 @@ public class Order_Products {
         this.id = id;
     }
 
-    public int getOrderid() {
-        return orderid;
+    public Orders getOrder() {
+        return order;
     }
 
-    public void setOrderid(int orderid) {
-        this.orderid = orderid;
+    public void setOrder(Orders order) {
+        this.order = order;
     }
 
-    public int getProductstockid() {
-        return productstockid;
+    public ProductStock getProductstock() {
+        return productstock;
     }
 
-    public void setProductstockid(int productstockid) {
-        this.productstockid = productstockid;
+    public void setProductstock(ProductStock productstock) {
+        this.productstock = productstock;
     }
 
     @Override
@@ -48,16 +50,16 @@ public class Order_Products {
 
         Order_Products that = (Order_Products) o;
 
-        if (getOrderid() != that.getOrderid()) return false;
-        if (getProductstockid() != that.getProductstockid()) return false;
-        return getId() != null ? getId().equals(that.getId()) : that.getId() == null;
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getOrder() != null ? !getOrder().equals(that.getOrder()) : that.getOrder() != null) return false;
+        return getProductstock() != null ? getProductstock().equals(that.getProductstock()) : that.getProductstock() == null;
     }
 
     @Override
     public int hashCode() {
         int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + getOrderid();
-        result = 31 * result + getProductstockid();
+        result = 31 * result + (getOrder() != null ? getOrder().hashCode() : 0);
+        result = 31 * result + (getProductstock() != null ? getProductstock().hashCode() : 0);
         return result;
     }
 
@@ -65,8 +67,8 @@ public class Order_Products {
     public String toString() {
         return "Order_Products{" +
                 "id=" + id +
-                ", orderid=" + orderid +
-                ", productstockid=" + productstockid +
+                ", order=" + order +
+                ", productstock=" + productstock +
                 '}';
     }
 }

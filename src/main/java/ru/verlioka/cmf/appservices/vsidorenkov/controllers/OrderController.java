@@ -39,4 +39,18 @@ public class OrderController {
         return ordersService.GetRequest2();
     }
 
+
+    @RequestMapping(value = "/get_criteria1", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List GetCriteriaRequest1() {
+        return ordersService.GetCriteriaRequest1();
+    }
+
+    @RequestMapping(value = "/get_criteria2", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List GetCriteriaRequest2() {
+        return ordersService.GetCriteriaRequest2();
+    }
 }

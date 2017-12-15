@@ -12,11 +12,13 @@ public class Orders {
     @Column( name = "id" )
     private Long id;
 
-    @Column( name = "clientid" )
-    private int clientid;
+    @ManyToOne
+    @JoinColumn( name = "clientid" )
+    private Clients client;
 
-    @Column( name = "deliverytypeid" )
-    private int deliverytypeid;
+    @ManyToOne
+    @JoinColumn( name = "deliverytypeid" )
+    private DeliveryType deliverytype;
 
     @Column( name = "orderdate" )
     private Date orderdate;
@@ -35,20 +37,20 @@ public class Orders {
         this.id = id;
     }
 
-    public int getClientid() {
-        return clientid;
+    public Clients getClient() {
+        return client;
     }
 
-    public void setClientid(int clientid) {
-        this.clientid = clientid;
+    public void setClient(Clients client) {
+        this.client = client;
     }
 
-    public int getDeliverytypeid() {
-        return deliverytypeid;
+    public DeliveryType getDeliverytype() {
+        return deliverytype;
     }
 
-    public void setDeliverytypeid(int deliverytypeid) {
-        this.deliverytypeid = deliverytypeid;
+    public void setDeliverytype(DeliveryType deliverytype) {
+        this.deliverytype = deliverytype;
     }
 
     public Date getOrderdate() {
@@ -82,19 +84,20 @@ public class Orders {
 
         Orders orders = (Orders) o;
 
-        if (getClientid() != orders.getClientid()) return false;
-        if (getDeliverytypeid() != orders.getDeliverytypeid()) return false;
         if (getOrderprice() != orders.getOrderprice()) return false;
         if (getDeliveryprice() != orders.getDeliveryprice()) return false;
         if (getId() != null ? !getId().equals(orders.getId()) : orders.getId() != null) return false;
+        if (getClient() != null ? !getClient().equals(orders.getClient()) : orders.getClient() != null) return false;
+        if (getDeliverytype() != null ? !getDeliverytype().equals(orders.getDeliverytype()) : orders.getDeliverytype() != null)
+            return false;
         return getOrderdate() != null ? getOrderdate().equals(orders.getOrderdate()) : orders.getOrderdate() == null;
     }
 
     @Override
     public int hashCode() {
         int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + getClientid();
-        result = 31 * result + getDeliverytypeid();
+        result = 31 * result + (getClient() != null ? getClient().hashCode() : 0);
+        result = 31 * result + (getDeliverytype() != null ? getDeliverytype().hashCode() : 0);
         result = 31 * result + (getOrderdate() != null ? getOrderdate().hashCode() : 0);
         result = 31 * result + getOrderprice();
         result = 31 * result + getDeliveryprice();
@@ -105,8 +108,8 @@ public class Orders {
     public String toString() {
         return "Orders{" +
                 "id=" + id +
-                ", clientid=" + clientid +
-                ", deliverytypeid=" + deliverytypeid +
+                ", client=" + client +
+                ", deliverytype=" + deliverytype +
                 ", orderdate=" + orderdate +
                 ", orderprice=" + orderprice +
                 ", deliveryprice=" + deliveryprice +
