@@ -25,7 +25,7 @@ public class CriminalController
     {
         byte[] data = reportCriminalService.generatePdf(criminalService.getAll());
                 
-        criminalService.getNotProccessed();
+        //criminalService.getNotProccessed();
         
         System.out.println();
         

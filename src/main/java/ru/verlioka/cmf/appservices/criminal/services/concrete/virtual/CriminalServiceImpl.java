@@ -32,7 +32,7 @@ public class CriminalServiceImpl extends GenericServiceImpl<Criminal, Long>
     
 	public List getNotProccessed()
 	{
-		  String str = "SELECT COUNT(*) FROM criminal WHERE isprocessed=0";
+		  String str = "select count(*) from criminal where isprocessed=0";
 		  Session session = ((Session) entityManager.getDelegate()).getSessionFactory().openSession();
 		  Query query = session.createQuery(str);
 		  return query.list();
