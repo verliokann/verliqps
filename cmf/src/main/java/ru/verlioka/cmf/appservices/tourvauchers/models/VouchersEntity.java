@@ -7,49 +7,37 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "vauchers")
+@Table(name = "vouchers")
 public class VouchersEntity {
 	
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vaucher_id", nullable = false, unique = true)
+    @Column(name = "voucher_id", nullable = false, unique = true)
     private Long id;
-	
-	@Column(name = "country", nullable = false)
-    private String country;
-	
-	@Column(name = "seaside", nullable = false)
-    private String seaside;
-	
-	@Column(name = "hotel", nullable = false)
-    private String hotel;
-	
-	@Column(name = "rating", nullable = false)
-    private int rating;
-	
-	@Column(name = "cost", nullable = false)
-    private float cost;
-	
-	@Column(name = "dayscount", nullable = false)
-    private int dayscount;
-	
-	@Column(name = "beachtype", nullable = false)
-    private String beachtype;
-	
-	@Column(name = "startdate", nullable = false)
-    private Date startdate;
-	
-	@Column(name = "finishdate", nullable = false)
-    private Date finishdate;
-	
-	@Column(name = "istravelpaid", nullable = false)
-    private boolean istravelpaid;
-	
-	@Column(name = "isvisaneed", nullable = false)
-    private boolean isvisaneed;
+
+    @OneToOne
+    @JoinColumn(name = "hotel_id", nullable = false)
+    private HotelEntity hotel;
+
+    @Column(name = "cost", nullable = false)
+    private Double cost;
+
+    @Column(name = "days", nullable = false)
+    private Integer days;
+
+    @Column(name = "startdate", nullable = false)
+    private Date start;
+
+    @Column(name = "finishdate", nullable=false)
+    private Date finish;
+
+    @Column(name = "travel_expenses_included")
+    private Boolean travelpaid = false;
 
 	public Long getId() {
 		return id;
@@ -59,99 +47,77 @@ public class VouchersEntity {
 		this.id = id;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getSeaside() {
-		return seaside;
-	}
-
-	public void setSeaside(String seaside) {
-		this.seaside = seaside;
-	}
-
-	public String getHotel() {
+	public HotelEntity getHotel() {
 		return hotel;
 	}
 
-	public void setHotel(String hotel) {
+	public void setHotel(HotelEntity hotel) {
 		this.hotel = hotel;
 	}
 
-	public int getRating() {
-		return rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
-	public float getCost() {
+	public Double getCost() {
 		return cost;
 	}
 
-	public void setCost(float cost) {
+	public void setCost(Double cost) {
 		this.cost = cost;
 	}
 
-	public int getDayscount() {
-		return dayscount;
+	public Integer getDays() {
+		return days;
 	}
 
-	public void setDayscount(int dayscount) {
-		this.dayscount = dayscount;
+	public void setDays(Integer days) {
+		this.days = days;
 	}
 
-	public String getBeachtype() {
-		return beachtype;
+	public Date getStart() {
+		return start;
 	}
 
-	public void setBeachtype(String beachtype) {
-		this.beachtype = beachtype;
+	public void setStart(Date start) {
+		this.start = start;
 	}
 
-	public Date getStartdate() {
-		return startdate;
+	public Date getFinish() {
+		return finish;
 	}
 
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
+	public void setFinish(Date finish) {
+		this.finish = finish;
 	}
 
-	public Date getFinishdate() {
-		return finishdate;
+	public Boolean getTravelpaid() {
+		return travelpaid;
 	}
 
-	public void setFinishdate(Date finishdate) {
-		this.finishdate = finishdate;
-	}
-
-	public boolean isIstravelpaid() {
-		return istravelpaid;
-	}
-
-	public void setIstravelpaid(boolean istravelpaid) {
-		this.istravelpaid = istravelpaid;
-	}
-
-	public boolean isIsvisaneed() {
-		return isvisaneed;
-	}
-
-	public void setIsvisaneed(boolean isvisaneed) {
-		this.isvisaneed = isvisaneed;
+	public void setTravelpaid(Boolean travelpaid) {
+		this.travelpaid = travelpaid;
 	}
 	
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "ID="+id+" country="+country+" seaside="+seaside+" hotel="+hotel+" rating="+rating+" cost="+cost+" days="+dayscount+" from="+startdate+" to="+finishdate;
-		
+	@SuppressWarnings("deprecation")
+	public int getStartMonth()
+	{
+		return this.start.getMonth();
 	}
+	
+	@SuppressWarnings("deprecation")
+	public int getFinishMonth()
+	{
+		return this.finish.getMonth();
+	}
+    
+	@Override
+    public String toString() {
+        return "VoucherEntity{" +
+                "id=" + id +
+                ", hotel=" + hotel +
+                ", cost=" + cost +
+                ", days=" + days +
+                ", start=" + start +
+                ", finish=" + finish +
+                ", istravelpaid=" + travelpaid +
+                '}';
+    }
 
 }

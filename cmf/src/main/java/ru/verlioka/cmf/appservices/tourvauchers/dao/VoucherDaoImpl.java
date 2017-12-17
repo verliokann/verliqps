@@ -20,12 +20,9 @@ public class VoucherDaoImpl extends GenericDaoImpl<VouchersEntity, Long> impleme
     public VoucherDaoImpl() {
     }
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<VouchersEntity> getVouchersByRating(int rating) {
-		Query query = em.createQuery("from VouchersEntity where rating = :Rating");
-        query.setParameter("Rating", rating);
-        return query.getResultList();
+	public EntityManager getEntityManager() {
+		return em;
 	}
 
 }
