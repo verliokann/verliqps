@@ -1,0 +1,26 @@
+[
+  {
+    "voucherId":1,
+    "countryName":"India",
+    "hotelName":"The Verda Carmona",
+    "start":"2017-10-11",
+    "end":"2017-10-25",
+    "cost":40000.0
+  },
+  {
+    "voucherId":3,
+    "countryName":"India",
+    "hotelName":"La Riviere",
+    "start":"2017-12-03",
+    "end":"2017-12-17",
+    "cost":30500.0
+  },
+  {
+    "voucherId":4,
+    "countryName":"UAE",
+    "hotelName":"Carlton Tower Hotel Dubai",
+    "start":"2017-05-01",
+    "end":"2017-05-08",
+    "cost":45000.0
+  }
+]
