@@ -17,11 +17,20 @@ var ZUI ={
 		
 		//Открывает контентную часть модельных форм ввода/редактирования данных
 		//Стиль unvisibleblock описан в файле /resources/app_admin/css/admin_main.css
-		refreshModal: function(block1,block2,block3)
+		refreshModal: function(item)
 		{
-		    document.getElementById(block1).className="modal-content";
-		    document.getElementById(block2).className="modal-content unvisibleblock";
-		    document.getElementById(block3).className="modal-content unvisibleblock";
+			var item = $(item),
+				blockName = item.attr('block');
+			
+			$("#" + blockName + 'edtform').attr('class', 'modal-content');
+			$("#" + blockName + 'deleteform').attr('class', 'modal-content');
+			
+			$('[block]').each(function(i, elem) {
+				var thisObj = $(elem);
+				if (blockName == thisObj.attr('block')) return;
+				$("#" + thisObj.attr('block') + "edtform").attr('class', 'modal-content unvisibleblock');
+				$("#" + thisObj.attr('block') + "deleteform").attr('class', 'modal-content unvisibleblock');
+			});
 		}, 
 		
 		loadCss: function (url) {

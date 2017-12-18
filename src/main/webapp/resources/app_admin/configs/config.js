@@ -42,7 +42,13 @@ requirejs.config({
 		"bgfilter"    	: 'components/backgrid-filter-master/backgrid-filter.min',		
 		"bgselectall"  	: 'components/backgrid-select-all-master/backgrid-select-all',
 		"bbserv"       	: 'app_admin/js/bbserv',		
-		"app"       	: 'app_admin/js/main'
+		"app"       	: 'app_admin/js/main',
+		
+		"application"        	: 'app_admin/js/models/application',
+		"applications"        	: 'app_admin/js/collections/applications',
+		"applicationeditform" 	: 'app_admin/js/views/applicationeditform',		
+		"applicationdeleteform" : 'app_admin/js/views/applicationdeleteform',
+		"applicationpaggrid"  	: 'app_admin/js/views/applicationpaggrid'
 	},	
 	shim: {
 		 underscore: {

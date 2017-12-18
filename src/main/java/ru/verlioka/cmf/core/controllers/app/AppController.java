@@ -23,8 +23,7 @@ public class AppController {
 	
 	@Autowired
 	private IAppService as;
-	
-	
+		
 	@RequestMapping(value="/app/{id}", method=RequestMethod.GET)
 	public @ResponseBody EntityApp getApp(@PathVariable int id) {
 		EntityApp r = as.find(id);
