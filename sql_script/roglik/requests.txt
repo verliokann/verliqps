@@ -1,0 +1,3 @@
+/cmf/roglik/lowcost?price=25000
+/cmf/roglik/beach?beachType=sand
+/cmf/roglik/report

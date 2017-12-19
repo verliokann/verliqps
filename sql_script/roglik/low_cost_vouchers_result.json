@@ -1,0 +1,12 @@
+[
+  {
+    "countryName": "India",
+    "beachName": "Beach 1",
+    "cost": 20000.0
+  },
+  {
+    "countryName": "UAE",
+    "beachName": "Beach 4",
+    "cost": 25000.0
+  }
+]
