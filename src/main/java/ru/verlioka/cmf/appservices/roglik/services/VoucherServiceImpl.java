@@ -11,10 +11,7 @@ import ru.verlioka.cmf.appservices.roglik.models.VoucherEntity;
 import ru.verlioka.cmf.core.services.generic.db.GenericServiceImpl;
 
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service("voucherService")
@@ -46,6 +43,7 @@ public class VoucherServiceImpl extends GenericServiceImpl<VoucherEntity, Long> 
                     result.setCountryName(voucher.getHotel().getCountry().getName());
                     return result;
                 })
+                .sorted(Comparator.comparingDouble(LowCostVouchers::getCost))
                 .collect(Collectors.toList());
     }
 
@@ -66,7 +64,9 @@ public class VoucherServiceImpl extends GenericServiceImpl<VoucherEntity, Long> 
                     result.setCost(voucher.getCost());
                     result.setDiscountedCost(voucher.getCost() * (1 - 0.3));
                     return result;
-                }).collect(Collectors.toList());
+                })
+                .sorted(Comparator.comparing(CertainBeachVoucher::getHotelName))
+                .collect(Collectors.toList());
 
         CertainBeachVouchers totalResult = new CertainBeachVouchers();
         totalResult.setVouchers(certainVouchers);
@@ -95,6 +95,7 @@ public class VoucherServiceImpl extends GenericServiceImpl<VoucherEntity, Long> 
             result.add(t);
         }
 
+        result.sort(Comparator.comparing(BeachTypes::getBeachType));
         return result;
     }
 }
