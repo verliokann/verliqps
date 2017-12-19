@@ -1,0 +1,26 @@
+{
+  "vouchers": [
+    {
+      "countryName": "India",
+      "hotelName": "The Verda Carmona",
+      "beachName": "Beach 1",
+      "departureDate": "2017-10-11",
+      "arrivalDate": "2017-10-25",
+      "cost": 20000.0,
+      "days": 14,
+      "discountedCost": 14000.0
+    },
+    {
+      "countryName": "India",
+      "hotelName": "La Riviere",
+      "beachName": "Beach 2",
+      "departureDate": "2017-12-03",
+      "arrivalDate": "2017-12-17",
+      "cost": 35000.0,
+      "days": 14,
+      "discountedCost": 24500.0
+    }
+  ],
+  "totalCost": 55000.0,
+  "totalDiscountedCost": 38500.0
+}

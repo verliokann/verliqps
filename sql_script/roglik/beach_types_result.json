@@ -1,0 +1,12 @@
+[
+  {
+    "beachType": "sand",
+    "totalCost": 55000.0,
+    "vouchersAmount": 2
+  },
+  {
+    "beachType": "stone",
+    "totalCost": 55000.0,
+    "vouchersAmount": 2
+  }
+]
