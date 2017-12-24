@@ -18,7 +18,7 @@ public class Motherboards {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn( name = "processor" )
     private Processors processor;
 

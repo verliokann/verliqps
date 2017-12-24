@@ -15,7 +15,7 @@ public class System_units {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn( name = "motherboard" )
     private Motherboards motherboard;
 

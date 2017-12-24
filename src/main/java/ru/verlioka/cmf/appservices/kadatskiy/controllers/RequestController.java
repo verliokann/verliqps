@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.verlioka.cmf.appservices.angry.controllers.Criteria.CriteriaRequest1;
 import ru.verlioka.cmf.appservices.angry.controllers.Criteria.CriteriaRequest2;
-import ru.verlioka.cmf.appservices.angry.model.CommodityEntity;
 import ru.verlioka.cmf.appservices.kadatskiy.models.Motherboards;
 import ru.verlioka.cmf.appservices.kadatskiy.services.MotherboardsService;
 import ru.verlioka.cmf.appservices.kadatskiy.services.ProcessorsService;
