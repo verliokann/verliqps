@@ -236,14 +236,6 @@
 			<version>5.5.10</version>
 		</dependency>  
 		
-		<!-- Для работы с агентами -->
-		<dependency>  
-    		<groupId>com.tilab.jade</groupId> 
-    		<artifactId>jade</artifactId> 
-    		<version>4.5.0</version>  
-		</dependency>
-		
-		
 		<!-- CORS!!!!! -->
   		<dependency>
     		<groupId>com.thetransactioncompany</groupId>
