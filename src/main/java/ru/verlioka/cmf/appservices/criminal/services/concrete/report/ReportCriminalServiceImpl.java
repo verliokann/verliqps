@@ -43,7 +43,7 @@ public class ReportCriminalServiceImpl implements ReportCriminalService
 
             //file path
             String path = pdfFilename;
-            File temp = File.createTempFile(pdfFilename, ".tmp");
+            File temp = Files.createTempFile(pdfFilename, ".tmp").toFile();
             res = temp;
             docWriter = PdfWriter.getInstance(doc, new FileOutputStream(temp));
 
